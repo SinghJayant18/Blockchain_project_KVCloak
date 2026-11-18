@@ -44,6 +44,7 @@ outputs/
 *.pt
 *.json
 *.jsonl
+!dataset/*.jsonl
 
 # Jupyter
 .ipynb_checkpoints/

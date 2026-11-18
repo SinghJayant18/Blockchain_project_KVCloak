@@ -171,10 +171,16 @@ class BenchmarkRunner:
         times = []
         with torch.no_grad():
             for _ in range(self.num_trials):
-                torch.cuda.synchronize(self.device)
+                if "cuda" in str(self.device) and torch.cuda.is_available():
+                    torch.cuda.synchronize(self.device)
+                elif "mps" in str(self.device) and torch.backends.mps.is_available():
+                    torch.mps.synchronize()
                 start_time = time.time()
                 intermediate_result = operation_func(kv_cache)
-                torch.cuda.synchronize(self.device)
+                if "cuda" in str(self.device) and torch.cuda.is_available():
+                    torch.cuda.synchronize(self.device)
+                elif "mps" in str(self.device) and torch.backends.mps.is_available():
+                    torch.mps.synchronize()
                 end_time = time.time()
                 times.append(end_time - start_time)
                 del intermediate_result
@@ -330,7 +336,24 @@ def main():
         if args.model_path is not None
         else Path(f"~/model/{args.model_name}").expanduser()
     )
-    model_config = AutoConfig.from_pretrained(model_path)
+    if model_path.exists():
+        model_config = AutoConfig.from_pretrained(model_path)
+    else:
+        try:
+            model_config = AutoConfig.from_pretrained(args.model_name)
+        except Exception:
+            # Fallback for known models
+            from transformers import PretrainedConfig
+            if "llama" in args.model_name.lower():
+                model_config = PretrainedConfig(
+                    model_type="llama",
+                    num_hidden_layers=16 if "1b" in args.model_name.lower() else 32,
+                    num_key_value_heads=8 if "1b" in args.model_name.lower() else 32,
+                    num_attention_heads=32,
+                    hidden_size=2048 if "1b" in args.model_name.lower() else 4096,
+                )
+            else:
+                model_config = AutoConfig.from_pretrained("gpt2")
 
     if model_config.model_type == "gpt2":
         num_hidden_layers = model_config.n_layer

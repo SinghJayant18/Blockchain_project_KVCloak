@@ -1,0 +1,10 @@
+{"instruction": "Give three tips for staying healthy.", "input": "", "output": "1. Eat a balanced diet. 2. Exercise regularly. 3. Get adequate sleep."}
+{"instruction": "What are the three primary colors?", "input": "", "output": "The three primary colors are red, blue, and yellow."}
+{"instruction": "Identify the odd one out in the following list.", "input": "Twitter, Instagram, Telegram, Apple", "output": "Apple is a consumer electronics company, while the others are social communication platforms."}
+{"instruction": "Translate the sentence to French.", "input": "The weather is very pleasant today.", "output": "Il fait tres beau aujourd hui."}
+{"instruction": "Explain the function of mitochondria in eukaryotic cells.", "input": "", "output": "Mitochondria generate most of the chemical energy needed to power the cell biochemical reactions in the form of ATP."}
+{"instruction": "Generate a list of five ingredients needed to bake chocolate chip cookies.", "input": "", "output": "Flour, sugar, butter, eggs, and chocolate chips."}
+{"instruction": "Write a concise email subject line for a quarterly sales report meeting.", "input": "", "output": "Quarterly Sales Review & Strategic Planning - Q3 Updates"}
+{"instruction": "Calculate the perimeter of a rectangle with length 12cm and width 7cm.", "input": "", "output": "The perimeter is 2 * (12 + 7) = 38 cm."}
+{"instruction": "Classify the following animal as mammal, bird, reptile, or amphibian.", "input": "Penguin", "output": "Penguin is a bird."}
+{"instruction": "Name three major renewable energy sources.", "input": "", "output": "Solar power, wind energy, and hydroelectric energy."}
